@@ -1,8 +1,6 @@
-## Правила и регламент
+# 1_validator_test
 
-- [Экзамен: правила, рекомендации и порядок проведения](https://hexly.notion.site/d9289c18871c44508bc7c7f05a51d94f)
-
-## Задание
+## Задание  
 
 Ваша задача написать валидатор, в котором есть ряд методов и свойств и экспортировать его из файла *src/Validator.js*. Валидатор позволяет проверять аргументы на соответствие необходимым условиям, которые были заданы с помощью методов валидатора.
 
@@ -147,3 +145,125 @@ schema.isValid({ id: 11, basket: [] }); // false
 ```
 
 После добавления методов `object()` и `shape()`, экземпляр валидатора сможет проверять поля объекта на соответствие заданным валидаторам
+__________
+
+## Exercise
+
+Your task is to write a validator that has a number of methods and properties and export it from the *src/Validator.js* file. The validator allows you to check arguments against the necessary conditions that were specified using validator methods.
+
+Usage example:
+
+```javascript
+// create a validator instance
+const v = new Validator();
+// define a method for validating numbers and connect it to the validator, accessing it through a variable.
+const schema = v.number();
+
+// check the data for compliance with the numeric type using the isValid() method
+schema.isValid('Hexlet'); // false
+schema.isValid(''); // false
+schema.isValid(null); // false
+schema.isValid(123); // true
+```
+
+### Notes
+
+You can test the operation of the validator yourself. The *src* directory allows you to use any files and create new ones if it makes your development more convenient. You don't have to use all the files, just implement the validator in Validator.js, the rest of the files are created for your convenience.
+
+To test a validator, just create an instance of the validator, set up validation using methods and call the `isValid()` method with the required argument, then write in the terminal:
+
+```bash
+node index.js
+```
+
+## 1 task
+
+You need to create a validator that can take an argument and check it against certain conditions. In this task, we limit ourselves to validating only numbers. To do this, your validator must have a `number()` method that instantiates a number validator. This instance has an `isValid()` method that takes input and returns true or false depending on whether the input is a number or not.
+
+**Options and methods**
+
+- the argument that we validate (check)
+- `number()` validator method, which creates a number validator instance
+- the `isValid()` instance method, which is called on the `number()` instance, it takes data as input and validates
+
+```javascript
+const v = new Validator();
+const schema = v.number();
+
+schema.isValid(null); // false
+schema.isValid(''); // false
+schema.isValid(true); // false
+schema.isValid(123); // true
+schema.isValid(0); // true
+```
+
+After adding the `number()` and `isValid()` methods, the validator instance will check whether the argument is a *Number* data type.
+
+## 2 task
+
+You need to extend the functionality of the number validator instance by adding `even()` and `odd()` methods to it.
+When calling the `even()` method, it adds an additional check,
+which will be executed when the `isValid()` method is called to determine whether the number is even. Conversely, calling the `odd()` method checks whether the number is odd.
+
+**Methods**
+
+- the `even()` method, which is called on the `number()` instance. It adds a parity check
+- the `odd()` method, which is called on the `number()` instance. It adds an odd parity check
+
+```javascript
+const v = new Validator();
+
+const schema1 = v.number();
+schema1.isValid(11); // true;
+
+const schema2 = v.number().even()
+schema2.isValid(2); // true;
+schema2.isValid(11); // false;
+
+const schema3 = v.number().odd();
+schema.isValid(22); // false;
+schema.isValid(23); // true;
+```
+
+After adding the `even()` or `odd()` methods, the number validator instance will check whether the argument is an even or odd number.
+
+## 3 task
+
+You need to create an array validator by adding an `array()` method to it. Similar to the `number()` method, the `array()` method instantiates an array validator. For array validation, this instance also has an `isValid()` method that checks whether the argument passed is an array.
+
+**Methods**
+
+- `array()` validator method, which instantiates an array validator
+- the `isValid()` method, which is called on the `array()` instance. It checks if the argument is an array
+
+```javascript
+const v = new Validator();
+const schema = v.array();
+
+schema.isValid([]); // true
+schema.isValid(123); // false
+schema.isValid('Hexlet'); // false
+```
+
+By adding the `array()` method, the validator instance will be able to check the passed values against an instance of the global Array object.
+
+## 4 task
+
+You need to extend the functionality of the array validator instance. In addition to being able to validate whether the argument is an array, it should also be able to check whether the array would be of the specified length if the `length()` method were called with the argument being a number indicating the desired length of the array.
+
+**Methods**
+
+- the `length()` method, which is called on the `array()` instance. It checks whether the length of the array matches the argument given in `length()`
+
+```javascript
+const v = new Validator();
+const schema1 = v.array();
+
+schema1.isValid([1, 2]); // true
+
+const schema2 = v.array().length(4);
+schema2.isValid([1, 2]); // false
+schema2.isValid([1, 2, 2, 1]); // true
+```
+
+After adding the `length()` method, the array validator instance will be
