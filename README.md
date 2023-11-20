@@ -266,4 +266,29 @@ schema2.isValid([1, 2]); // false
 schema2.isValid([1, 2, 2, 1]); // true
 ```
 
-After adding the `length()` method, the array validator instance will be
+By adding the `length()` method, the array validator instance will be able to check whether the length of the array matches the length specified in the method.
+
+## 5 task
+
+You need to create an object field validator using the methods presented in the previous tasks. To do this, you need to create a method `object()`, which checks not the object itself, but the data inside it for compliance with the specified validators. The `Validator.object()` method must contain a `shape()` method, which allows you to set the fields to be validated for the object. The `shape()` method accepts an object in which the keys represent the fields to be validated and the values represent validator instances. If the number of fields in the shape does not match the number of fields in the object being validated, then validation fails.
+
+**Methods**
+
+- validator method (instance of the *Validator* class) `object()`, which checks the data inside the object (object fields)
+- the `shape()` method, which is called on the `object()` instance. It allows you to set validation fields for an object
+
+```javascript
+const v = new Validator();
+
+// Allows you to describe validation for object properties
+const schema = v.object().shape({
+   id: v.number().odd(), // now, when validating an object with the key id, the value of this key will be validated in accordance with the current methods
+   basket: v.array().length(3),
+});
+
+schema.isValid({ id: 11, basket: ['potatos', 'tomatos', 'oranges'] }); // true
+schema.isValid({ id: 12, basket: ['potatos', 'tomatos', 'oranges'] }); // false
+schema.isValid({ id: 11, basket: [] }); // false
+```
+
+After adding the `object()` and `shape()` methods, the validator instance will be able to check the object's fields against the given validators
