@@ -1,5 +1,6 @@
 # 1_validator_test
 
+## Ru
 ## Задание  
 
 Ваша задача написать валидатор, в котором есть ряд методов и свойств и экспортировать его из файла *src/Validator.js*. Валидатор позволяет проверять аргументы на соответствие необходимым условиям, которые были заданы с помощью методов валидатора.
@@ -147,6 +148,7 @@ schema.isValid({ id: 11, basket: [] }); // false
 После добавления методов `object()` и `shape()`, экземпляр валидатора сможет проверять поля объекта на соответствие заданным валидаторам
 __________
 
+## En
 ## Exercise
 
 Your task is to write a validator that has a number of methods and properties and export it from the *src/Validator.js* file. The validator allows you to check arguments against the necessary conditions that were specified using validator methods.
