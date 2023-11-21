@@ -1,4 +1,4 @@
-# 1_validator_test
+# 1_validator
 
 ## Задание - Ru
 
